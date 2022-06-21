@@ -1,11 +1,9 @@
+<?php $features = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5']; ?>
 <div id="sidebar">
     <h3> Sidebar </h3>
     <ul>
-        <li>Feature 1</li>
-        <li>Feature 2</li>
-        <li>Feature 3</li>
-        <li>Feature 4</li>
-        <li>Feature 5</li>
-        <li>Feature 6</li>
+        <?php foreach ($features as $index => $feature) {
+            echo "<li>$feature</li>";
+        } ?>
     </ul>
 </div>
