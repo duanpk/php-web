@@ -1,0 +1,211 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header,
+footer {
+    background-color: #5F524F;
+    padding: 20px;
+}
+
+header {
+    display: grid;
+    height: 100px;
+    grid-template-columns: 20% 50% 30%;
+    justify-content: center;
+    align-content: center;
+}
+
+header div:first-child {
+    border: 1px solid #fff;
+    padding: 10px;
+    width: 50%;
+    text-align: center;
+}
+
+.slogan {
+    color: #fff;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    line-height: 1.5em;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    padding-top: 0.1em;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+}
+
+.slogan::before,
+.slogan::after {
+    content: "§";
+    display: inline-block;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    opacity: 0.2;
+    margin: 0 0.5em;
+    font-size: 1em;
+}
+
+input {
+    font-family: Poppins-Medium;
+    color: #666666;
+    height: 40px;
+    outline: none;
+    border: none;
+    padding: 0 30px 0 30px;
+}
+
+#form {
+    text-align: right;
+}
+
+#form ul {
+    list-style: none;
+}
+
+#form ul li {
+    display: inline-block;
+    padding: 0 15px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+#form li span {
+    font-weight: 700;
+    color: #080;
+}
+
+#form a {
+    color: #fff;
+}
+
+
+#login {
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 30px 0;
+    display: none;
+    width: 320px;
+    top: 55px;
+    right: 20px;
+}
+
+#login input {
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+    background: #e6e6e6;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+#login button {
+    font-family: Montserrat-Bold;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    width: 68%;
+    height: 50px;
+    border-radius: 25px;
+    background: #57b846;
+    margin-right: 50px;
+    margin-top: 20px;
+    border: none;
+}
+
+#login button:hover {
+    background: #333333;
+}
+
+#login label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-left: 80px;
+}
+
+#login label input {
+    display: inline-block;
+    height: 20px;
+    position: absolute;
+    left: -20px;
+}
+
+#search {
+    position: relative;
+    margin-top: 30px;
+}
+
+/* #search input {
+    /* padding: 6px; 
+} */
+
+#search i {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    color: green;
+}
+
+nav {
+    border: 1px solid #ccc;
+}
+
+nav ul {
+    /* allow centering to work  */
+    display: table;
+    margin: 0 auto;
+}
+
+nav ul li {
+    display: inline-block;
+    height: 15px;
+    padding: 20px;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 75% auto;
+    grid-column-gap: 10px;
+    min-height: 500px;
+}
+
+#main-content,
+#sidebar {
+    padding: 5px 20px;
+    border: 1px solid;
+}
+
+#sidebar ul li {
+    padding: 10px 0;
+}
+
+footer {
+    display: grid;
+    grid-template-columns: auto 75%;
+}
+
+#scroll {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background-color: rgba(2, 129, 1, 0.85);
+    text-align: center;
+}
+
+#scroll a {
+    color: #fff;
+}
+
+#scroll i {
+    margin-top: 8px;
+}
