@@ -29,5 +29,7 @@
     <ul>
         <li><a href="index.php">Home</a></li>
         <li><a href="index.php?m=profile">My Profile</a></li>
+        <li><a href="index.php?m=user">User</a></li>
+        <li><a href="index.php?m=create">Create</a></li>
     </ul>
 </nav>

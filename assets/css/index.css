@@ -52,12 +52,25 @@ header div:first-child {
 }
 
 input {
-    font-family: Poppins-Medium;
-    color: #666666;
-    height: 40px;
-    outline: none;
-    border: none;
-    padding: 0 30px 0 30px;
+    border: 1px solid;
+    padding: 10px;
+    /* width: 100%; */
+    font-size: 1.2em;
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"] {
+    background-color: #5F524F;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1.5em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 #form {
@@ -208,4 +221,26 @@ footer {
 
 #scroll i {
     margin-top: 8px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    background-color: #ccc;
+    /* width: 100%; */
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
