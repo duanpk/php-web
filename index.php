@@ -15,6 +15,7 @@ $titleArr = [
     'create' => 'Create User',
     'edit' => 'Edit User',
     'delete' => 'Delete User',
+    'cookie' => 'Cookie',
 ];
 $module = $_GET['m'];
 $module = $module ?? 'home';

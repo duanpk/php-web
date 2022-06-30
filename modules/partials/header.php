@@ -31,5 +31,8 @@
         <li><a href="index.php?m=profile">My Profile</a></li>
         <li><a href="index.php?m=user">User</a></li>
         <li><a href="index.php?m=create">Create</a></li>
+        <li><a href="index.php?m=cookie">Cookie</a></li>
+        <li><a href="index.php?m=session">Session</a></li>
+        <li><a href="index.php?m=sessionTest">Session Test</a></li>
     </ul>
 </nav>
