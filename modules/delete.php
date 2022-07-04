@@ -5,8 +5,8 @@ $id = $_GET['id'];
 
 // Delete data
 try {
-    $db->table('users')->delete($id);
+    $db->table('users')->where('id', $id, '=')->delete();
     header('Location: index.php?m=user');
 } catch (PDOException $e) {
-    echo $e->getMessage();
+    header('Location: index.php?m=error&msg=' . $e->getMessage());
 }

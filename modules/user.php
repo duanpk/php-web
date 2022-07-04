@@ -21,14 +21,18 @@ $db = new Database('127.0.0.1', 'root', 'bietlamgi', 'php_mysql');
             </thead>
             <tbody>
                 <?php
-                $users = $db->table('users')->getAll();
+                try {
+                    $users = $db->table('users')->get();
+                } catch (PDOException $e) {
+                    header('Location: index.php?m=error&msg=' . $e->getMessage());
+                }
                 foreach ($users as $user) {
                     echo "<tr>";
-                    echo "<td>{$user['id']}</td>";
-                    echo "<td>{$user['username']}</td>";
-                    echo "<td>{$user['password']}</td>";
-                    echo "<td>{$user['fullname']}</td>";
-                    echo "<td>{$user['email']}</td>";
+                    echo "<td>" . htmlspecialchars($user['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($user['username']) . "</td>";
+                    echo "<td>" . htmlspecialchars($user['password']) . "</td>";
+                    echo "<td>" . htmlspecialchars($user['fullname']) . "</td>";
+                    echo "<td>" . htmlspecialchars($user['email']) . "</td>";
                     echo "<td><a href='index.php?m=edit&id={$user['id']}'>Sửa&nbsp;&nbsp;</a>";
                     echo "<a href='index.php?m=delete&id={$user['id']}'>Xóa</a></td>";
                     echo "</tr>";

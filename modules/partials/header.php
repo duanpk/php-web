@@ -1,3 +1,7 @@
+<?php
+session_start();
+$name = $_SESSION['name'] ?? "Guest";
+?>
 <header>
     <div>
         <h4>The logo</h4>
@@ -7,13 +11,17 @@
     </div>
     <div id="form">
         <ul>
-            <li>Hi <span>Guest</span></li>
-            <li><a href="javascript:void(0)" onclick="showLoginForm()">Login</a></li>
+            <li>Hi <span><?php echo $name ?></span></li>
+            <li>
+                <?php echo $_SESSION['name']
+                    ? '<a href="index.php?m=login">Logout</a>'
+                    : '<a href="javascript:void(0)" onclick="showLoginForm()">Login</a>' ?>
+            </li>
         </ul>
 
-        <form id="login">
-            <input type="text" name="username" placeholder="User name" />
-            <input type="password" name="password" placeholder="Password" />
+        <form id="login" method="post" action="index.php?m=login">
+            <input type="text" name="username" placeholder="User name" required />
+            <input type="password" name="password" placeholder="Password" required />
             <label><input type="checkbox" name="rememberUsername" />Remember user name </label>
             <button type="submit" name="Login">Login</button>
         </form>
@@ -29,10 +37,10 @@
     <ul>
         <li><a href="index.php">Home</a></li>
         <li><a href="index.php?m=profile">My Profile</a></li>
-        <li><a href="index.php?m=user">User</a></li>
-        <li><a href="index.php?m=create">Create</a></li>
-        <li><a href="index.php?m=cookie">Cookie</a></li>
-        <li><a href="index.php?m=session">Session</a></li>
-        <li><a href="index.php?m=sessionTest">Session Test</a></li>
+        <li><a href="index.php?m=user">List User</a></li>
+        <!-- <li><a href="index.php?m=create">Create</a></li> -->
+        <!-- <li><a href="index.php?m=cookie">Cookie</a></li>
+        <li><a href="index.php?m=session">Session</a></li> -->
+        <li><a href="index.php?m=register">Register</a></li>
     </ul>
 </nav>

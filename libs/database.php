@@ -7,6 +7,7 @@ class Database
     private $password;
     private $db_name;
     private $tableName;
+    private $conditions = [];
     private $conn;
 
     /**
@@ -27,6 +28,11 @@ class Database
         $this->db_name = $db_name;
 
         $this->conn = $this->connect();
+    }
+
+    public function __destruct()
+    {
+        $this->closeConnection();
     }
 
     private function connect()
@@ -51,80 +57,78 @@ class Database
         return $this;
     }
 
-    public function get($id)
+    public function where($column, $value, $operator = '=' || 'LIKE' || '>' || '<' || '>=' || '<=')
     {
-        try {
-            $sql = "SELECT * FROM $this->tableName WHERE id = $id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new Exception($e->getMessage());
-        }
+        $this->conditions[] = [
+            'column' => $column,
+            'value' => strtoupper($operator) === 'LIKE' ? "%$value%" : $value,
+            'operator' => $operator,
+        ];
+        return $this;
     }
 
-    public function getAll()
+    private function getCondition()
     {
-        try {
-            $sql = "SELECT * FROM $this->tableName";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new Exception($e->getMessage());
+        if (count($this->conditions) <= 0) {
+            return '';
         }
+        $condition = 'WHERE ';
+        $condition .= array_reduce($this->conditions, function ($carry, $item) {
+            // $newCondition = $item['column'] . ' ' . $item['operator'] . ' ' . $item['value'];
+            $newCondition = "$item[column] $item[operator] '$item[value]'";
+            if ($carry) {
+                return $carry . ' AND ' . $newCondition;
+            }
+            return $newCondition;
+        });
+        return $condition;
+    }
+
+    public function get()
+    {
+        $sql = "SELECT * FROM {$this->tableName} {$this->getCondition()}";
+        echo $sql;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function insert($data)
     {
-        try {
-            $sql = "INSERT INTO $this->tableName SET ";
-            foreach (array_keys($data) as $column) {
-                $sql .= "$column = ?, ";
-            }
-            // slice off the last comma and space
-            $sql = substr($sql, 0, -2);
-
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(array_values($data));
-            return $this->conn->lastInsertId();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new Exception($e->getMessage());
+        $sql = "INSERT INTO $this->tableName SET ";
+        foreach (array_keys($data) as $column) {
+            $sql .= "$column = ?, ";
         }
+        // slice off the last comma and space
+        $sql = substr($sql, 0, -2);
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(array_values($data));
+        return $this->conn->lastInsertId();
     }
 
-    public function update($data, $id)
+    public function update($data)
     {
-        try {
-            $sql = "UPDATE $this->tableName SET ";
-            foreach (array_keys($data) as $column) {
-                $sql .= "$column = ?, ";
+        $sql = "UPDATE $this->tableName SET ";
+        $sql .= array_reduce(array_keys($data), function ($carry, $item) {
+            $newValue = $item . ' = ?';
+            if ($carry) {
+                return $carry . ', ' . $newValue;
             }
-            // slice off the last comma and space
-            $sql = substr($sql, 0, -2);
-            $sql .= " WHERE id = $id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(array_values($data));
-            return $stmt->rowCount();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new Exception($e->getMessage());
-        }
+            return $newValue;
+        });
+        $sql .= $this->getCondition();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(array_values($data));
+        return $stmt->rowCount();
     }
 
-    public function delete($id)
+    public function delete()
     {
-        try {
-            $sql = "DELETE FROM $this->tableName WHERE id = $id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->rowCount();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            throw new Exception($e->getMessage());
-        }
+        $sql = "DELETE FROM $this->tableName {$this->getCondition()}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }
