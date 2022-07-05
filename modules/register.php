@@ -1,4 +1,5 @@
 <?php
+if ($_SESSION) header('Location: index.php?m=profile');
 if ($_POST['submit'] === 'register') {
     require_once __DIR__ . '/../libs/database.php';
     $db = new Database();
@@ -15,7 +16,7 @@ if ($_POST['submit'] === 'register') {
     // Insert data
     try {
         $db->table('users')->insert($data);
-        header('Location: index.php?m=user');
+        header('Location: index.php');
     } catch (PDOException $e) {
         header('Location: index.php?m=error&msg=' . $e->getMessage());
     }

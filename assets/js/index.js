@@ -51,3 +51,14 @@ function showLoginForm() {
 
     form.style.display = form.style.display ? '' : 'block';
 }
+
+const submitChangePassword = (e) => {
+    const newPassword = e.elements['new-password'].value;
+    const confirmPassword = e.elements['confirm-password'].value;
+
+    if (newPassword !== confirmPassword) {
+        alert('Passwords do not match');
+        event.preventDefault();
+        // return;
+    }
+};

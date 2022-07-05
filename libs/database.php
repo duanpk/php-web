@@ -87,7 +87,7 @@ class Database
     public function get()
     {
         $sql = "SELECT * FROM {$this->tableName} {$this->getCondition()}";
-        echo $sql;
+        // echo $sql;
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

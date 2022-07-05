@@ -14,7 +14,7 @@ if ($_POST['submit'] === 'edit') {
     // Update data
     try {
         $db->table('users')->where('id', $id, '=')->update($data);
-        header('Location: index.php?m=user');
+        header('Location: index.php');
     } catch (PDOException $e) {
         header('Location: index.php?m=error&msg=' . $e->getMessage());
     }

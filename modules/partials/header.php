@@ -36,11 +36,9 @@ $name = $_SESSION['name'] ?? "Guest";
 <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><a href="index.php?m=profile">My Profile</a></li>
-        <li><a href="index.php?m=user">List User</a></li>
-        <!-- <li><a href="index.php?m=create">Create</a></li> -->
-        <!-- <li><a href="index.php?m=cookie">Cookie</a></li>
-        <li><a href="index.php?m=session">Session</a></li> -->
-        <li><a href="index.php?m=register">Register</a></li>
+        <?php if ($_SESSION) echo '<li><a href="index.php?m=profile">My Profile</a></li>' ?>
+        <!-- <li><a href="index.php?m=user">List User</a></li> -->
+        <?php if (!$_SESSION) echo '<li><a href="index.php?m=register">Register</a></li>' ?>
+        <?php if ($_SESSION) echo '<li><a href="index.php?m=change">Change password</a></li>' ?>
     </ul>
 </nav>

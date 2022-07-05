@@ -2,10 +2,10 @@
 $titleArr = [
     'profile' => 'My Profile',
     'home' => 'Home',
-    'user' => 'User',
     'register' => 'Register',
     'edit' => 'Edit User',
     'error' => 'Error',
+    'change' => 'Change Password',
 ];
 $module = $_GET['m'];
 $module = $module ?? 'home';
